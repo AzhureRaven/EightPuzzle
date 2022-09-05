@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace EightPuzzle
 {
-    class State
+    public class State
     {
         public State parent;
         public int[,] num;
@@ -29,11 +29,11 @@ namespace EightPuzzle
 
         public void findZero()
         {
-            for (int i = 0; i < num.GetLength(0); i++)
+            for (int i = 0; i < this.num.GetLength(0); i++)
             {
-                for (int j = 0; j < num.GetLength(1); j++)
+                for (int j = 0; j < this.num.GetLength(1); j++)
                 {
-                    if (num[i, j] == 0)
+                    if (this.num[i, j] == 0)
                     {
                         this.x = i;
                         this.y = j;
@@ -45,13 +45,35 @@ namespace EightPuzzle
 
         public bool cekKembar(State state)
         {
-            if(num.GetLength(0) == state.num.GetLength(0) && num.GetLength(1) == state.num.GetLength(1))
+            if(this.num.GetLength(0) == state.num.GetLength(0) && this.num.GetLength(1) == state.num.GetLength(1))
             {
-                for (int i = 0; i < num.GetLength(0); i++)
+                for (int i = 0; i < this.num.GetLength(0); i++)
                 {
-                    for (int j = 0; j < num.GetLength(1); j++)
+                    for (int j = 0; j < this.num.GetLength(1); j++)
                     {
-                        if (num[i, j] != state.num[i, j])
+                        if (this.num[i, j] != state.num[i, j])
+                        {
+                            return false;
+                        }
+                    }
+                }
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool cekKembar(int[,] num)
+        {
+            if (this.num.GetLength(0) == num.GetLength(0) && this.num.GetLength(1) == num.GetLength(1))
+            {
+                for (int i = 0; i < this.num.GetLength(0); i++)
+                {
+                    for (int j = 0; j < this.num.GetLength(1); j++)
+                    {
+                        if (this.num[i, j] != num[i, j])
                         {
                             return false;
                         }
