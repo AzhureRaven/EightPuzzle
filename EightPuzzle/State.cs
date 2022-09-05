@@ -29,6 +29,7 @@ namespace EightPuzzle
 
         public void findZero()
         {
+            //untuk cari posisi 0 biar gk repot nanti
             for (int i = 0; i < this.num.GetLength(0); i++)
             {
                 for (int j = 0; j < this.num.GetLength(1); j++)
