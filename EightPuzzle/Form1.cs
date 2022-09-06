@@ -29,7 +29,7 @@ namespace EightPuzzle
             {-1, 6, 7, 8,-1 },
             {-1,-1,-1,-1,-1 },
         };//goal state
-        //input start dan goal manual di set dalam program. -1 diluar jangan di ubah, hanya yang di dalam
+        //input start dan goal manual di set dalam program. -1 ditepi jangan di ubah, hanya yang di dalam
         Queue<State> open = new Queue<State>();//queue open
         Stack<State> close = new Stack<State>();//stack close
         List<State> successor = new List<State>();//daftar successor
@@ -68,15 +68,44 @@ namespace EightPuzzle
             //buka node
             //masukkan ke close
             close.Push(state);
-            //berikut cek empat arah 0 bisa lewati lalu dimasukkan ke dalam successor
-            //if()
+            //tambahkan jumlah node terbuka
+            updateLabel();
+            //tampung koordinat x y biar gk repot panggilnya 
+            int x = state.x;
+            int y = state.y;
+            //berikut cek empat arah 0 bisa lewati lalu dimasukkan ke dalam successor kalau berhasil
+            //atas
+            if (state.num[y-1,x] != -1)
+            {
+
+            }
+            //bawah
+            if (state.num[y + 1, x] != -1)
+            {
+
+            }
+            //kanan
+            if (state.num[y, x+1] != -1)
+            {
+
+            }
+            //kiri
+            if (state.num[y, x - 1] != -1)
+            {
+
+            }
         }
 
-        //public int[,] tukar(int x, int y, State state)
+        //public int[,] tukar(int x, int y, int newX, int newY, State state)
         //{
         //    //tukar posisi matriks
-            
+
         //}
+
+        public void updateLabel()
+        {
+            label1.Text = "Nodes Expanded: " + ++expandCtr;
+        }
 
         public void cetak()
         {

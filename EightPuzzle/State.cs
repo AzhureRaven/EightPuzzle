@@ -36,8 +36,8 @@ namespace EightPuzzle
                 {
                     if (this.num[i, j] == 0)
                     {
-                        this.x = i;
-                        this.y = j;
+                        this.x = j;
+                        this.y = i;
                         break;
                     }
                 }
