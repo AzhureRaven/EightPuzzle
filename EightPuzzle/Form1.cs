@@ -57,7 +57,7 @@ namespace EightPuzzle
                 if (open.Peek().cekKembar(goal))
                 {
                     //ketemu jawaban
-                    MessageBox.Show("Test");
+                    cetak();
                 }
                 else
                 {
@@ -166,7 +166,21 @@ namespace EightPuzzle
         //cetak step solusi
         public void cetak()
         {
-            
+            Stack<State> ans = new Stack<State>();//tampungan jawaban
+            //looping menelusuri parent state dari goal sampai start sambil dimasukkan kedalam ans
+            State temp;
+            temp = open.Peek();
+            ans.Push(temp);
+            do
+            {
+                temp = temp.parent;
+                ans.Push(temp);
+            } while (temp.parent != null);
+            //cetak ans
+            while (ans.Count != 0)
+            {
+                richTextBox1.Text += ans.Pop().cetak() + "\n";
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -176,6 +190,7 @@ namespace EightPuzzle
 
         private void button1_Click(object sender, EventArgs e)
         {
+            button1.Enabled = false;
             init_start();
             bfs();
             if (!berhasil)
