@@ -60,6 +60,7 @@ namespace EightPuzzle
             this.Controls.Add(this.richTextBox1);
             this.Name = "Form1";
             this.Text = "8-Puzzle";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

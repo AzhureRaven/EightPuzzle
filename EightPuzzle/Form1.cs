@@ -36,8 +36,6 @@ namespace EightPuzzle
         public Form1()
         {
             InitializeComponent();
-            init_start();
-            bfs();
         }
 
         public void init_start()
@@ -111,6 +109,12 @@ namespace EightPuzzle
         {
             //cetak step solusi
             //richTextBox1.Text += open.Dequeue().cekKembar(goal).ToString();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            init_start();
+            bfs();
         }
     }
 }
