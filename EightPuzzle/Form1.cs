@@ -13,6 +13,30 @@ namespace EightPuzzle
     public partial class Form1 : Form
     {
         int expandCtr = 0;//untuk hitung berapa node terbuka
+        int recurCtr = 0;//untuk hitung berapa recurring state;
+        //5x5
+        //int[,] start = new int[,]
+        //{
+        //    {-1,-1,-1,-1,-1,-1,-1 },
+        //    {-1, 1, 2, 3, 4, 5,-1 },
+        //    {-1, 6, 7, 8, 9,10,-1 },
+        //    {-1,11,12,13,14,15,-1 },
+        //    {-1,16,17,18,19,20,-1 },
+        //    {-1,21,22,23,24,0,-1 },
+        //    {-1,-1,-1,-1,-1,-1,-1 },
+        //};//start state
+        //int[,] goal = new int[,]
+        //{
+        //    {-1,-1,-1,-1,-1,-1,-1 },
+        //    {-1, 1, 0, 3, 4, 5,-1 },
+        //    {-1, 6, 7, 8, 9,10,-1 },
+        //    {-1,11,12,13,14,15,-1 },
+        //    {-1,16,17,18,19,20,-1 },
+        //    {-1,21,22,23,24,2,-1 },
+        //    {-1,-1,-1,-1,-1,-1,-1 },
+        //};//goal state
+
+        //3x3
         int[,] start = new int[,]
         {
             {-1,-1,-1,-1,-1 },
@@ -29,6 +53,23 @@ namespace EightPuzzle
             {-1, 6, 7, 8,-1 },
             {-1,-1,-1,-1,-1 },
         };//goal state
+
+        //2x2
+        //int[,] start = new int[,]
+        //{
+        //    {-1,-1,-1,-1 },
+        //    {-1, 0, 1,-1 },
+        //    {-1, 2, 3,-1 },
+        //    {-1,-1,-1,-1 },
+        //};//start state
+        //int[,] goal = new int[,]
+        //{
+        //    {-1,-1,-1,-1 },
+        //    {-1, 1, 3,-1 },
+        //    {-1, 0, 2,-1 },
+        //    {-1,-1,-1,-1 },
+        //};//goal state
+
         //input start dan goal manual di set dalam program. -1 ditepi jangan di ubah, hanya yang di dalam
         Queue<State> open = new Queue<State>();//queue open
         Stack<State> close = new Stack<State>();//stack close
@@ -43,7 +84,7 @@ namespace EightPuzzle
         public void init_start()
         {
             open.Enqueue(new State(null, start));
-            updateLabel();
+            updateExpand();
             //cetak();
         }
 
@@ -128,13 +169,14 @@ namespace EightPuzzle
                 kenaKembar: if (kembar)
                 {
                     successor.RemoveAt(i);
+                    updateRecur();
                 }
             }
             //masukkan successor ke dalam open
             for (int i = 0; i < successor.Count; i++)
             {
                 open.Enqueue(successor[i]);
-                updateLabel();
+                updateExpand();
             }
             successor.Clear();
         }
@@ -158,9 +200,19 @@ namespace EightPuzzle
         }
 
         //update label nodes expanded
-        public void updateLabel()
+        public void updateExpand()
         {
             label1.Text = "Nodes Expanded: " + ++expandCtr;
+            label1.Invalidate();
+            label1.Update();
+        }
+
+        //update label recurrung
+        public void updateRecur()
+        {
+            label2.Text = "Recurring State: " + ++recurCtr;
+            label2.Invalidate();
+            label2.Update();
         }
 
         //cetak step solusi
@@ -177,10 +229,13 @@ namespace EightPuzzle
                 ans.Push(temp);
             } while (temp.parent != null);
             //cetak ans
+            int depth = 0;//untuk hitung kedalaman solusi
             while (ans.Count != 0)
             {
                 richTextBox1.Text += ans.Pop().cetak() + "\n";
+                depth++;
             }
+            label3.Text = " Kedalaman Solusi: " + depth;
         }
 
         private void Form1_Load(object sender, EventArgs e)
