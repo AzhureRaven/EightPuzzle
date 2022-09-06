@@ -14,6 +14,7 @@ namespace EightPuzzle
     {
         int expandCtr = 0;//untuk hitung berapa node terbuka
         int recurCtr = 0;//untuk hitung berapa recurring state;
+        int reneCtr = 0;//untuk hitung berapa renegade state yaitu yang coba tukar dgn tepi
         //5x5
         //int[,] start = new int[,]
         //{
@@ -123,26 +124,42 @@ namespace EightPuzzle
             int x = state.x;
             int y = state.y;
             int[,] num = state.num;
-            //berikut cek empat arah 0 bisa pindah lalu dimasukkan ke dalam successor kalau berhasil
+            //berikut cek empat arah 0 bisa pindah lalu dimasukkan ke dalam successor kalau berhasil, jika satu arah tidak boleh maka sebuah renegade state
             //atas
             if (num[y-1,x] != -1)
             {
                 successor.Add(new State(state, tukar(x, y, x, y - 1, num)));
+            }
+            else
+            {
+                updateRene();
             }
             //bawah
             if (num[y + 1, x] != -1)
             {
                 successor.Add(new State(state, tukar(x, y, x, y + 1, num)));
             }
+            else
+            {
+                updateRene();
+            }
             //kanan
             if (num[y, x + 1] != -1)
             {
                 successor.Add(new State(state, tukar(x, y, x + 1, y, num)));
             }
+            else
+            {
+                updateRene();
+            }
             //kiri
             if (num[y, x - 1] != -1)
             {
                 successor.Add(new State(state, tukar(x, y, x - 1, y, num)));
+            }
+            else
+            {
+                updateRene();
             }
             //cek successor bukan recurring state
             for (int i = successor.Count - 1; i >= 0; i--)
@@ -173,7 +190,7 @@ namespace EightPuzzle
                     updateRecur();
                 }
             }
-            //masukkan successor ke dalam open
+            //masukkan successor ke dalam open, update nodes expanded (nodes expanded tidak termasuk recurring dan renegade state)
             for (int i = 0; i < successor.Count; i++)
             {
                 open.Enqueue(successor[i]);
@@ -216,6 +233,14 @@ namespace EightPuzzle
             label2.Update();
         }
 
+        //update label renegade
+        public void updateRene()
+        {
+            label4.Text = "Renegade State: " + ++reneCtr;
+            label4.Invalidate();
+            label4.Update();
+        }
+
         //cetak step solusi
         public void cetak()
         {
@@ -236,7 +261,7 @@ namespace EightPuzzle
                 richTextBox1.Text += ans.Pop().cetak() + "\n";
                 depth++;
             }
-            label3.Text = "Kedalaman Solusi: " + depth;
+            label3.Text = "Depth of Solution: " + depth;
         }
 
         //jalankan bfs
