@@ -166,6 +166,7 @@ namespace EightPuzzle
                         goto kenaKembar;
                     }
                 }
+                //hapus successor yang kembar
                 kenaKembar: if (kembar)
                 {
                     successor.RemoveAt(i);
@@ -207,7 +208,7 @@ namespace EightPuzzle
             label1.Update();
         }
 
-        //update label recurrung
+        //update label recurring
         public void updateRecur()
         {
             label2.Text = "Recurring State: " + ++recurCtr;
