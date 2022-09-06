@@ -235,14 +235,10 @@ namespace EightPuzzle
                 richTextBox1.Text += ans.Pop().cetak() + "\n";
                 depth++;
             }
-            label3.Text = " Kedalaman Solusi: " + depth;
+            label3.Text = "Kedalaman Solusi: " + depth;
         }
 
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            
-        }
-
+        //jalankan bfs
         private void button1_Click(object sender, EventArgs e)
         {
             button1.Enabled = false;

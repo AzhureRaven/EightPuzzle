@@ -8,10 +8,10 @@ namespace EightPuzzle
 {
     public class State
     {
-        public State parent;
-        public int[,] num;
-        public int x;
-        public int y;
+        public State parent;//simpanan parent node
+        public int[,] num;//matriksnya
+        public int x;//koordinat x 0
+        public int y;//koordinat y 0
 
         public State(State parent, int[,] num)
         {
@@ -73,11 +73,11 @@ namespace EightPuzzle
                 return true;
             }
             else
-            {
+            { 
                 return false;
             }
         }
-
+        //fungsi sama yang terima matriks saja
         public bool cekKembar(int[,] num)
         {
             if (this.num.GetLength(0) == num.GetLength(0) && this.num.GetLength(1) == num.GetLength(1))
