@@ -20,16 +20,27 @@ namespace EightPuzzle
             findZero();
         }
 
+        //cetak matriksnya
         public string cetak()
         {
-            return $"{num[1, 1]} {num[1, 2]} {num[1, 3]}\n" +
-                $"{num[2, 1]} {num[2, 2]} {num[2, 3]} \n" +
-                $"{num[3, 1]} {num[3, 2]} {num[3, 3]} \n";
+            string cetakan = "";
+            for (int i = 1; i < this.num.GetLength(0)-1; i++)
+            {
+                for (int j = 1; j < this.num.GetLength(1)-1; j++)
+                {
+                    cetakan += num[i, j] + " ";
+                }
+                cetakan += "\n";
+            }
+            return cetakan;
+            //return $"{num[1, 1]} {num[1, 2]} {num[1, 3]}\n" +
+            //    $"{num[2, 1]} {num[2, 2]} {num[2, 3]} \n" +
+            //    $"{num[3, 1]} {num[3, 2]} {num[3, 3]} \n";
         }
 
+        //untuk cari posisi 0 lalu ditampung x y biar gk repot nanti
         public void findZero()
         {
-            //untuk cari posisi 0 biar gk repot nanti
             for (int i = 0; i < this.num.GetLength(0); i++)
             {
                 for (int j = 0; j < this.num.GetLength(1); j++)
@@ -44,6 +55,7 @@ namespace EightPuzzle
             }
         }
 
+        //cek kedua matriks kembar, kembali true kalau kembar
         public bool cekKembar(State state)
         {
             if(this.num.GetLength(0) == state.num.GetLength(0) && this.num.GetLength(1) == state.num.GetLength(1))
