@@ -18,7 +18,8 @@ namespace EightPuzzle
         {
             this.parent = parent;
             this.num = num;
-            this.mismatch = cekMismatch();
+            this.mismatch = cekMismatch(Form1.goal);//H(N)
+            this.mismatch += cekMismatch(Form1.start);//G(N)
             findZero();
             addParentMismatch();
         }
@@ -102,17 +103,17 @@ namespace EightPuzzle
                 return false;
             }
         }
-        //fungsi heuristic untuk cari berapa mismatch dengan goal state
-        public int cekMismatch()
+        //fungsi untuk cari berapa mismatch dengan goal/initial state.
+        public int cekMismatch(int[,] num)
         {
             int miss = 0;
-            if (this.num.GetLength(0) == Form1.goal.GetLength(0) && this.num.GetLength(1) == Form1.goal.GetLength(1))
+            if (this.num.GetLength(0) == num.GetLength(0) && this.num.GetLength(1) == num.GetLength(1))
             {
                 for (int i = 0; i < this.num.GetLength(0); i++)
                 {
                     for (int j = 0; j < this.num.GetLength(1); j++)
                     {
-                        if (this.num[i, j] != Form1.goal[i, j])
+                        if (this.num[i, j] != num[i, j])
                         {
                             miss++;
                         }
@@ -126,13 +127,10 @@ namespace EightPuzzle
             return miss;
         }
 
-        //ditambahkan mismatch parent untuk A*
+        //ditambahkan mismatch dengan start state untuk A*
         public void addParentMismatch()
         {
-            if(this.parent != null)
-            {
-                this.mismatch += parent.mismatch;
-            }
+            
         }
 
     }
