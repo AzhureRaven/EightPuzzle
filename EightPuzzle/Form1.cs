@@ -41,7 +41,7 @@ namespace EightPuzzle
         //};//goal state
 
         //3x3
-        int[,] start = new int[,]
+        public static int[,] start = new int[,]
         {
             {-1,-1,-1,-1,-1 },
             {-1, 1, 7, 4,-1 },
@@ -49,7 +49,7 @@ namespace EightPuzzle
             {-1, 8, 3, 5,-1 },
             {-1,-1,-1,-1,-1 },
         };//start state
-        int[,] goal = new int[,]
+        public static int[,] goal = new int[,]
         {
             {-1,-1,-1,-1,-1 },
             {-1, 0, 1, 2,-1 },

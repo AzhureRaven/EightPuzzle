@@ -12,11 +12,13 @@ namespace EightPuzzle
         public int[,] num;//matriksnya
         public int x;//koordinat x 0
         public int y;//koordinat y 0
+        public int mismatch;//jumlah tile yang gk cocok dgn goal state
 
         public State(State parent, int[,] num)
         {
             this.parent = parent;
             this.num = num;
+            this.mismatch = cekMismatch();
             findZero();
         }
 
@@ -98,6 +100,29 @@ namespace EightPuzzle
             {
                 return false;
             }
+        }
+        //fungsi heuristic untuk cari berapa mismatch dengan goal state
+        public int cekMismatch()
+        {
+            int miss = 0;
+            if (this.num.GetLength(0) == Form1.goal.GetLength(0) && this.num.GetLength(1) == Form1.goal.GetLength(1))
+            {
+                for (int i = 0; i < this.num.GetLength(0); i++)
+                {
+                    for (int j = 0; j < this.num.GetLength(1); j++)
+                    {
+                        if (this.num[i, j] != Form1.goal[i, j])
+                        {
+                            miss++;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                return -1;
+            }
+            return miss;
         }
 
     }
