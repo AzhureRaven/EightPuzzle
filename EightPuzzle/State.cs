@@ -21,7 +21,6 @@ namespace EightPuzzle
             this.mismatch = cekMismatch(Form1.goal);//H(N)
             this.mismatch += cekMismatch(Form1.start);//G(N)
             findZero();
-            addParentMismatch();
         }
 
         //cetak matriksnya
@@ -127,11 +126,7 @@ namespace EightPuzzle
             return miss;
         }
 
-        //ditambahkan mismatch dengan start state untuk A*
-        public void addParentMismatch()
-        {
-            
-        }
+        
 
     }
 }
