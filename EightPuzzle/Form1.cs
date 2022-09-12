@@ -18,8 +18,8 @@ namespace EightPuzzle
         int expandCtr = 0;//untuk hitung berapa node terbuka
         int recurCtr = 0;//untuk hitung berapa recurring state;
         int reneCtr = 0;//untuk hitung berapa renegade state yaitu yang coba tukar dgn tepi
-        //5x5
-        //int[,] start = new int[,]
+        //5x5 (pakai A* masih gak bisa, stackoverflow
+        //public static int[,] start = new int[,]
         //{
         //    {-1,-1,-1,-1,-1,-1,-1 },
         //    {-1, 1, 2, 3, 4, 5,-1 },
@@ -29,7 +29,7 @@ namespace EightPuzzle
         //    {-1,21,22,23,24, 0,-1 },
         //    {-1,-1,-1,-1,-1,-1,-1 },
         //};//start state
-        //int[,] goal = new int[,]
+        //public static int[,] goal = new int[,]
         //{
         //    {-1,-1,-1,-1,-1,-1,-1 },
         //    {-1, 1, 0, 3, 4, 5,-1 },
@@ -38,6 +38,26 @@ namespace EightPuzzle
         //    {-1,16,17,18,19,20,-1 },
         //    {-1,21,22,23,24, 2,-1 },
         //    {-1,-1,-1,-1,-1,-1,-1 },
+        //};//goal state
+        
+        //4x4
+        //public static int[,] start = new int[,]
+        //{
+        //    {-1,-1,-1,-1,-1,-1 },
+        //    {-1, 1, 5, 2, 3,-1 },
+        //    {-1, 0, 9, 6, 7,-1 },
+        //    {-1, 4, 8,11,15,-1 },
+        //    {-1,12,10,13,14,-1 },
+        //    {-1,-1,-1,-1,-1,-1 },
+        //};//start state
+        //public static int[,] goal = new int[,]
+        //{
+        //    {-1,-1,-1,-1,-1,-1 },
+        //    {-1, 0, 1, 2, 3,-1 },
+        //    {-1, 4, 5, 6, 7,-1 },
+        //    {-1, 8, 9,10,11,-1 },
+        //    {-1,12,13,14,15,-1 },
+        //    {-1,-1,-1,-1,-1,-1 },
         //};//goal state
 
         //3x3
@@ -75,7 +95,7 @@ namespace EightPuzzle
         //};//goal state
         //uncomment dan comment untuk pilih ukuran matriks, bisa buat sendiri
         //input start dan goal manual di set dalam program. -1 ditepi jangan di ubah, hanya yang di dalam
-        
+
         PriorityQueue<State> open = new PriorityQueue<State>();//queue open
         Stack<State> close = new Stack<State>();//stack close
         List<State> successor = new List<State>();//daftar successor
