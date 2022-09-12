@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace EightPuzzle
 {
+    //Abraham Arthur Fendy - 220116899
+    //Kevin Jonathan - 220116926
+    //
     public partial class Form1 : Form
     {
         int expandCtr = 0;//untuk hitung berapa node terbuka
@@ -23,7 +26,7 @@ namespace EightPuzzle
         //    {-1, 6, 7, 8, 9,10,-1 },
         //    {-1,11,12,13,14,15,-1 },
         //    {-1,16,17,18,19,20,-1 },
-        //    {-1,21,22,23,24,0,-1 },
+        //    {-1,21,22,23,24, 0,-1 },
         //    {-1,-1,-1,-1,-1,-1,-1 },
         //};//start state
         //int[,] goal = new int[,]
@@ -33,7 +36,7 @@ namespace EightPuzzle
         //    {-1, 6, 7, 8, 9,10,-1 },
         //    {-1,11,12,13,14,15,-1 },
         //    {-1,16,17,18,19,20,-1 },
-        //    {-1,21,22,23,24,2,-1 },
+        //    {-1,21,22,23,24, 2,-1 },
         //    {-1,-1,-1,-1,-1,-1,-1 },
         //};//goal state
 
@@ -70,7 +73,7 @@ namespace EightPuzzle
         //    {-1, 0, 2,-1 },
         //    {-1,-1,-1,-1 },
         //};//goal state
-
+        //uncomment dan comment untuk pilih ukuran matriks, bisa buat sendiri
         //input start dan goal manual di set dalam program. -1 ditepi jangan di ubah, hanya yang di dalam
         Queue<State> open = new Queue<State>();//queue open
         Stack<State> close = new Stack<State>();//stack close
