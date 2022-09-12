@@ -12,7 +12,7 @@ namespace EightPuzzle
 {
     //Abraham Arthur Fendy - 220116899
     //Kevin Jonathan - 220116926
-    //
+    //test
     public partial class Form1 : Form
     {
         int expandCtr = 0;//untuk hitung berapa node terbuka
