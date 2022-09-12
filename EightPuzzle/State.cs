@@ -20,6 +20,7 @@ namespace EightPuzzle
             this.num = num;
             this.mismatch = cekMismatch();
             findZero();
+            addParentMismatch();
         }
 
         //cetak matriksnya
@@ -123,6 +124,15 @@ namespace EightPuzzle
                 return -1;
             }
             return miss;
+        }
+
+        //ditambahkan mismatch parent untuk A*
+        public void addParentMismatch()
+        {
+            if(this.parent != null)
+            {
+                this.mismatch += parent.mismatch;
+            }
         }
 
     }
