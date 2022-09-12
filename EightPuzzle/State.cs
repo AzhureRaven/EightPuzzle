@@ -6,20 +6,22 @@ using System.Threading.Tasks;
 
 namespace EightPuzzle
 {
-    public class State
+    public class State : IComparable<State>
     {
         public State parent;//simpanan parent node
         public int[,] num;//matriksnya
         public int x;//koordinat x 0
         public int y;//koordinat y 0
-        public int mismatch;//jumlah tile yang gk cocok dgn goal state
+        public int mismatch;//F(N)
+        public int step;//G(N)
 
         public State(State parent, int[,] num)
         {
             this.parent = parent;
             this.num = num;
             this.mismatch = cekMismatch(Form1.goal);//H(N)
-            this.mismatch += cekMismatch(Form1.start);//G(N)
+            hitungStep();
+            this.mismatch += this.step;//tambahin G(N)
             findZero();
         }
 
@@ -126,7 +128,25 @@ namespace EightPuzzle
             return miss;
         }
 
-        
+        //fungsi untuk cari G(N), dihitung dari step parent ditambah satu biar lebih cepat
+        public void hitungStep()
+        {
+            //untuk initial state
+            if(this.parent == null)
+            {
+                this.step = 0;
+            }
+            else
+            {
+                this.step = this.parent.step + 1;
+            }
+        }
 
+        public int CompareTo(State other)
+        {
+            if (this.mismatch < other.mismatch) return -1;
+            else if (this.mismatch > other.mismatch) return 1;
+            else return 0;
+        }
     }
 }

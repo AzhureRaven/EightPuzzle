@@ -75,7 +75,8 @@ namespace EightPuzzle
         //};//goal state
         //uncomment dan comment untuk pilih ukuran matriks, bisa buat sendiri
         //input start dan goal manual di set dalam program. -1 ditepi jangan di ubah, hanya yang di dalam
-        Queue<State> open = new Queue<State>();//queue open
+        
+        PriorityQueue<State> open = new PriorityQueue<State>();//queue open
         Stack<State> close = new Stack<State>();//stack close
         List<State> successor = new List<State>();//daftar successor
         bool berhasil = true;//boolean apa bfs berhasil
@@ -96,7 +97,7 @@ namespace EightPuzzle
         public void bfs()
         {
             //cek open habis
-            if (open.Count != 0)
+            if (open.Count() != 0)
             {
                 //cek jawaban
                 if (open.Peek().cekKembar(goal))
@@ -169,7 +170,7 @@ namespace EightPuzzle
             {
                 bool kembar = false;
                 //cek dalam open
-                foreach (State st in open)
+                foreach (State st in open.data)
                 {
                     if (successor[i].cekKembar(st))
                     {
