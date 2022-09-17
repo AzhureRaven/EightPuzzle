@@ -18,6 +18,7 @@ namespace EightPuzzle
         int expandCtr = 0;//untuk hitung berapa node terbuka
         int recurCtr = 0;//untuk hitung berapa recurring state;
         int reneCtr = 0;//untuk hitung berapa renegade state yaitu yang coba tukar dgn tepi
+        
         //5x5 (pakai A* masih gak bisa, stackoverflow
         //public static int[,] start = new int[,]
         //{
@@ -39,7 +40,7 @@ namespace EightPuzzle
         //    {-1,21,22,23,24, 2,-1 },
         //    {-1,-1,-1,-1,-1,-1,-1 },
         //};//goal state
-        
+
         //4x4
         //public static int[,] start = new int[,]
         //{
@@ -79,14 +80,14 @@ namespace EightPuzzle
         };//goal state
 
         //2x2
-        //int[,] start = new int[,]
+        //public static int[,] start = new int[,]
         //{
         //    {-1,-1,-1,-1 },
         //    {-1, 0, 1,-1 },
         //    {-1, 2, 3,-1 },
         //    {-1,-1,-1,-1 },
         //};//start state
-        //int[,] goal = new int[,]
+        //public static int[,] goal = new int[,]
         //{
         //    {-1,-1,-1,-1 },
         //    {-1, 1, 3,-1 },
@@ -116,25 +117,26 @@ namespace EightPuzzle
         //run bfs
         public void bfs()
         {
-            //cek open habis
-            if (open.Count() != 0)
+            bool ketemu = false;
+            //lakukan looping hingga goal state tercapai atau open kehabisan state
+            do
             {
                 //cek jawaban
                 if (open.Peek().cekKembar(goal))
                 {
                     //ketemu jawaban
-                    cetak();
+                    ketemu = true;
                 }
                 else
                 {
                     //expand dan otomatis hapus state dari open
                     expand(open.Dequeue());
-                    bfs();//recursive jalan lagi
                 }
-            }
-            else
+            } while (open.Count() != 0 && !ketemu);
+            //jika goal state tidak ketemu, berarti gagal
+            if (!ketemu)
             {
-                berhasil = false;//kondisi gagal
+                berhasil = false;
             }
         }
 
@@ -294,9 +296,14 @@ namespace EightPuzzle
             button1.Enabled = false;
             init_start();
             bfs();
+            //jika goal state ditemukan, cetak solusi. Jika tidak, tampilkan pesan gagal
             if (!berhasil)
             {
                 richTextBox1.Text = "Gagal!";
+            }
+            else
+            {
+                cetak();
             }
         }
     }
