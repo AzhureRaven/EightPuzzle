@@ -145,7 +145,7 @@ namespace EightPuzzle
             this.button2.Enabled = false;
             this.button2.Location = new System.Drawing.Point(240, 12);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(453, 23);
+            this.button2.Size = new System.Drawing.Size(685, 23);
             this.button2.TabIndex = 10;
             this.button2.Text = "Reset";
             this.button2.UseVisualStyleBackColor = true;
@@ -153,21 +153,23 @@ namespace EightPuzzle
             // 
             // richTextBoxOpen
             // 
+            this.richTextBoxOpen.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
             this.richTextBoxOpen.Location = new System.Drawing.Point(471, 58);
             this.richTextBoxOpen.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBoxOpen.Name = "richTextBoxOpen";
             this.richTextBoxOpen.ReadOnly = true;
-            this.richTextBoxOpen.Size = new System.Drawing.Size(222, 197);
+            this.richTextBoxOpen.Size = new System.Drawing.Size(222, 422);
             this.richTextBoxOpen.TabIndex = 11;
             this.richTextBoxOpen.Text = "";
             // 
             // richTextBoxClose
             // 
-            this.richTextBoxClose.Location = new System.Drawing.Point(471, 280);
+            this.richTextBoxClose.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.richTextBoxClose.Location = new System.Drawing.Point(706, 58);
             this.richTextBoxClose.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBoxClose.Name = "richTextBoxClose";
             this.richTextBoxClose.ReadOnly = true;
-            this.richTextBoxClose.Size = new System.Drawing.Size(222, 197);
+            this.richTextBoxClose.Size = new System.Drawing.Size(222, 422);
             this.richTextBoxClose.TabIndex = 12;
             this.richTextBoxClose.Text = "";
             // 
@@ -183,7 +185,7 @@ namespace EightPuzzle
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(468, 266);
+            this.label8.Location = new System.Drawing.Point(703, 41);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(54, 13);
             this.label8.TabIndex = 14;
@@ -193,7 +195,7 @@ namespace EightPuzzle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(704, 488);
+            this.ClientSize = new System.Drawing.Size(937, 488);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.richTextBoxClose);

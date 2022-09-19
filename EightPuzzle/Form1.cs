@@ -18,6 +18,8 @@ namespace EightPuzzle
         int expandCtr = 0;//untuk hitung berapa node terbuka
         int recurCtr = 0;//untuk hitung berapa recurring state;
         int reneCtr = 0;//untuk hitung berapa renegade state yaitu yang coba tukar dgn tepi
+        int openCtr = 0;//untuk hitung nomer log open
+        int closeCtr = 0;//untuk hitung nomer log close
 
         public static int[,] start;//start state
         public static int[,] goal;//goal state
@@ -214,6 +216,30 @@ namespace EightPuzzle
                 updateExpand();
             }
             successor.Clear();
+            //cetak logging
+            cetakLoggingOpen();
+            cetakLoggingClose();
+        }
+
+        //fungsi cetak loggin open
+        public void cetakLoggingOpen()
+        {
+            richTextBoxOpen.Text += "Log " + ++openCtr + "\n";
+            foreach (State st in open.data)
+            {
+                richTextBoxOpen.Text += st.cetak() + "\n";
+            }
+            richTextBoxOpen.Text += "\n";
+        }
+        //fungsi cetak loggin close
+        public void cetakLoggingClose()
+        {
+            richTextBoxClose.Text += "Log " + ++closeCtr + "\n";
+            foreach (State st in close)
+            {
+                richTextBoxClose.Text += st.cetak() + "\n";
+            }
+            richTextBoxClose.Text += "\n";
         }
 
         //tukar posisi, x y yang punya 0, newX newY punya angka lain, kembalikan kopian matriks
@@ -287,6 +313,8 @@ namespace EightPuzzle
             button1.Enabled = false;
             button2.Enabled = true;
             init_start();
+            cetakLoggingOpen();
+            cetakLoggingClose();
             bfs();
             //jika goal state ditemukan, cetak solusi. Jika tidak, tampilkan pesan gagal
             if (!berhasil)
@@ -311,6 +339,8 @@ namespace EightPuzzle
             expandCtr = 0;
             recurCtr = 0;
             reneCtr = 0;
+            openCtr = 0;
+            closeCtr = 0;
             label4.Text = "Renegade State: ";
             label3.Text = "Depth of Solution: ";
             label2.Text = "Recurring State: ";
