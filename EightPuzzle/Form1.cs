@@ -18,84 +18,10 @@ namespace EightPuzzle
         int expandCtr = 0;//untuk hitung berapa node terbuka
         int recurCtr = 0;//untuk hitung berapa recurring state;
         int reneCtr = 0;//untuk hitung berapa renegade state yaitu yang coba tukar dgn tepi
-        
-        //5x5 (pakai A* masih gak bisa, stackoverflow
-        //public static int[,] start = new int[,]
-        //{
-        //    {-1,-1,-1,-1,-1,-1,-1 },
-        //    {-1, 1, 2, 3, 4, 5,-1 },
-        //    {-1, 6, 7, 8, 9,10,-1 },
-        //    {-1,11,12,13,14,15,-1 },
-        //    {-1,16,17,18,19,20,-1 },
-        //    {-1,21,22,23,24, 0,-1 },
-        //    {-1,-1,-1,-1,-1,-1,-1 },
-        //};//start state
-        //public static int[,] goal = new int[,]
-        //{
-        //    {-1,-1,-1,-1,-1,-1,-1 },
-        //    {-1, 1, 0, 3, 4, 5,-1 },
-        //    {-1, 6, 7, 8, 9,10,-1 },
-        //    {-1,11,12,13,14,15,-1 },
-        //    {-1,16,17,18,19,20,-1 },
-        //    {-1,21,22,23,24, 2,-1 },
-        //    {-1,-1,-1,-1,-1,-1,-1 },
-        //};//goal state
 
-        //4x4
-        //public static int[,] start = new int[,]
-        //{
-        //    {-1,-1,-1,-1,-1,-1 },
-        //    {-1, 1, 5, 2, 3,-1 },
-        //    {-1, 0, 9, 6, 7,-1 },
-        //    {-1, 4, 8,11,15,-1 },
-        //    {-1,12,10,13,14,-1 },
-        //    {-1,-1,-1,-1,-1,-1 },
-        //};//start state
-        //public static int[,] goal = new int[,]
-        //{
-        //    {-1,-1,-1,-1,-1,-1 },
-        //    {-1, 0, 1, 2, 3,-1 },
-        //    {-1, 4, 5, 6, 7,-1 },
-        //    {-1, 8, 9,10,11,-1 },
-        //    {-1,12,13,14,15,-1 },
-        //    {-1,-1,-1,-1,-1,-1 },
-        //};//goal state
+        public static int[,] start;//start state
+        public static int[,] goal;//goal state
 
-        //3x3
-        public static int[,] start = new int[,]
-        {
-            {-1,-1,-1,-1,-1 },
-            {-1, 1, 7, 4,-1 },
-            {-1, 6, 0, 2,-1 },
-            {-1, 8, 3, 5,-1 },
-            {-1,-1,-1,-1,-1 },
-        };//start state
-        public static int[,] goal = new int[,]
-        {
-            {-1,-1,-1,-1,-1 },
-            {-1, 0, 1, 2,-1 },
-            {-1, 3, 4, 5,-1 },
-            {-1, 6, 7, 8,-1 },
-            {-1,-1,-1,-1,-1 },
-        };//goal state
-
-        //2x2
-        //public static int[,] start = new int[,]
-        //{
-        //    {-1,-1,-1,-1 },
-        //    {-1, 0, 1,-1 },
-        //    {-1, 2, 3,-1 },
-        //    {-1,-1,-1,-1 },
-        //};//start state
-        //public static int[,] goal = new int[,]
-        //{
-        //    {-1,-1,-1,-1 },
-        //    {-1, 1, 3,-1 },
-        //    {-1, 0, 2,-1 },
-        //    {-1,-1,-1,-1 },
-        //};//goal state
-        //uncomment dan comment untuk pilih ukuran matriks, bisa buat sendiri
-        //input start dan goal manual di set dalam program. -1 ditepi jangan di ubah, hanya yang di dalam
 
         PriorityQueue<State> open = new PriorityQueue<State>();//queue open
         Stack<State> close = new Stack<State>();//stack close
@@ -109,9 +35,74 @@ namespace EightPuzzle
         //masukkan start ke root
         public void init_start()
         {
+            //baca start
+            readTextStart();
+            //baca goal
+            readTextGoal();
             open.Enqueue(new State(null, start));
             updateExpand();
             //cetak();
+        }
+
+        //baca start
+        public void readTextStart()
+        {
+            try
+            {
+                int row = richTextBoxStart.Lines.Length;
+                start = new int[row + 2, row + 2];
+                for (int i = 0; i < row + 2; i++)
+                {
+                    for (int j = 0; j < row + 2; j++)
+                    {
+                        start[i, j] = -1;
+                    }
+                }
+                for (int i = 0; i < row; i++)
+                {
+                    string line = richTextBoxStart.Lines[i];
+                    string[] angka = line.Split(' ');
+                    for (int j = 0; j < angka.Length; j++)
+                    {
+                        start[i + 1, j + 1] = Convert.ToInt32(angka[j]);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            
+        }
+        //baca goal
+        public void readTextGoal()
+        {
+            try
+            {
+                int row = richTextBoxGoal.Lines.Length;
+                goal = new int[row + 2, row + 2];
+                for (int i = 0; i < row + 2; i++)
+                {
+                    for (int j = 0; j < row + 2; j++)
+                    {
+                        goal[i, j] = -1;
+                    }
+                }
+                for (int i = 0; i < row; i++)
+                {
+                    string line = richTextBoxGoal.Lines[i];
+                    string[] angka = line.Split(' ');
+                    for (int j = 0; j < angka.Length; j++)
+                    {
+                        goal[i + 1, j + 1] = Convert.ToInt32(angka[j]);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message);
+            }
+            
         }
 
         //run bfs
@@ -294,6 +285,7 @@ namespace EightPuzzle
         private void button1_Click(object sender, EventArgs e)
         {
             button1.Enabled = false;
+            button2.Enabled = true;
             init_start();
             bfs();
             //jika goal state ditemukan, cetak solusi. Jika tidak, tampilkan pesan gagal
@@ -305,6 +297,27 @@ namespace EightPuzzle
             {
                 cetak();
             }
+        }
+
+        //reset menjadi awal
+        private void button2_Click(object sender, EventArgs e)
+        {
+            button1.Enabled = true;
+            button2.Enabled = false;
+            open = new PriorityQueue<State>();
+            close = new Stack<State>();
+            successor = new List<State>();
+            berhasil = true;
+            expandCtr = 0;
+            recurCtr = 0;
+            reneCtr = 0;
+            label4.Text = "Renegade State: ";
+            label3.Text = "Depth of Solution: ";
+            label2.Text = "Recurring State: ";
+            label1.Text = "Nodes Expanded: ";
+            richTextBox1.Text = "";
+            richTextBoxClose.Text = "";
+            richTextBoxOpen.Text = "";
         }
     }
 }
